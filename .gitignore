@@ -1,0 +1,8 @@
+.DS_Store
+/.project
+/.idea
+/.vagrant
+
+node_modules
+
+/config/config.js
