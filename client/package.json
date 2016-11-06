@@ -1,0 +1,21 @@
+{
+  "name": "DevCrew",
+  "version": "0.1.0",
+  "description": "angular_app",
+  "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server --config webpack.js --colors"
+  },
+  "author": "DevCrew",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "angular": "1.5.x",
+    "angular-ui-router": "0.2.14",
+    "bootstrap": "3.3.6",
+    "angular-ui-bootstrap": "0.14.3",
+    "lodash": "3.10.1",
+    "angular-strap": "2.3.7"
+  }
+}

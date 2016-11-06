@@ -1,26 +1,17 @@
 global.config = require('./config/main');
 global.db = require('./config/connection');
 
-var express = require('express')
-, app = express()
-, MongoClient = require('mongodb').MongoClient
-, assert = require('assert');
+var routes = require('./app/routes')
+, express = require('express')
+, path = require('path');
 
-app.get('/', function (req, res) {
+var app = express();
 
-  global.db.connect().then( function(db){
-    
-    db.collection("cart").find({}).toArray( function( err, docs){
-      assert.equal(err, null);
-      console.log("Found the following records");
-      console.log(docs)
-      global.db.close(db);
-    });
-    res.send("hello mongo");
+app.set('port', global.config.port || 3000);
+app.set('views', path.join(global.config.root, 'app/views'));
+app.set('view engine', 'ejs');
 
-  });
-  
-})
+routes(app);
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
