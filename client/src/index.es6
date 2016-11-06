@@ -5,13 +5,13 @@ import 'angular-ui-router';
 import RoutesConfig from "./routes.es6";
 
 console.log('hellp')
-class DevCrew {
+class dc {
   constructor() {
     console.log( 'charta bacho');
     angular
-    .module('devcrew', ['shop'])
+    .module('dc', ['shop'])
     .config(RoutesConfig);
   }
 }
 
-new DevCrew
+new dc

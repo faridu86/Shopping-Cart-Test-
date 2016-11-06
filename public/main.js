@@ -60,14 +60,14 @@
 	
 	console.log('hellp');
 	
-	var DevCrew = function DevCrew() {
-	  _classCallCheck(this, DevCrew);
+	var dc = function dc() {
+	  _classCallCheck(this, dc);
 	
 	  console.log('charta bacho');
-	  angular.module('devcrew', ['shop']).config(_routesEs62['default']);
+	  angular.module('dc', ['shop']).config(_routesEs62['default']);
 	};
 	
-	new DevCrew();
+	new dc();
 
 /***/ },
 /* 1 */

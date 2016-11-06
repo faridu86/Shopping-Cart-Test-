@@ -1,11 +1,11 @@
 {
-  "name": "DevCrew",
+  "name": "dc",
   "version": "0.1.0",
   "description": "angular_app",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server --config webpack.js --colors"
   },
-  "author": "DevCrew",
+  "author": "dc",
   "repository": {
     "type": "git",
     "url": ""
