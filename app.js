@@ -11,6 +11,8 @@ app.set('port', global.config.port || 3000);
 app.set('views', path.join(global.config.root, 'app/views'));
 app.set('view engine', 'ejs');
 
+app.use('/public', express.static(path.join(global.config.root, 'public')));
+  
 routes(app);
 
 app.listen(3000, function () {
