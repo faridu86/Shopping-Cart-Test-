@@ -1,38 +1,43 @@
 'use strict'
 
 let ShopService = function( $http){
-  this.products = [];
-  this.cart = [];
+  let service = this;
+  service.products = [];
+  service.cart = [];
 
-  this.setup = ( products) => {
-    this.products = products;
+  service.setup = ( products) => {
+    service.products = products;
   }
 
-  this.getProducts = () => {
-    return this.products;
+  service.getProducts = () => {
+    return service.products;
   }
 
-  this.getProduct = ( productId) => {
-    return _.find(this.products, ( product) => {
+  service.getProduct = ( productId) => {
+    return _.find(service.products, ( product) => {
       return product.id == productId;
     });
   }
 
-  this.addToCart = ( productId) => {
-    let product = this.getProduct( productId);
-    this.cart.push( product);
+  service.addToCart = ( productId) => {
+    let product = service.getProduct( productId);
+    $http.post("/cart/add-item", product).then( (response)=>{
+      service.cart.push( product);  
+    })    
   }
 
-  this.isInCart = ( id) => {
-    return !!_.find( this.cart, ( product) => { return product.id == id } );
+  service.isInCart = ( id) => {
+    return !!_.find( service.cart, ( product) => { return product.id == id } );
   }
   
-  this.removeFromCart = ( productId) => {
-    _.remove( this.cart, ( product) => { return product.id == productId } );
+  service.removeFromCart = ( productId) => {
+    $http.delete(`/cart/remove-item/${productId}`).then( (response)=>{
+      _.remove( service.cart, ( product) => { return product.id == productId } );
+    });
   }
 
-  this.getTotal = () => {
-    return _.sum( _.pluck( this.cart, 'price'));
+  service.getTotal = () => {
+    return _.sum( _.pluck( service.cart, 'price'));
   }
 
 };

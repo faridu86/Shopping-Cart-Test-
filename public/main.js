@@ -45212,44 +45212,47 @@
 	  value: true
 	});
 	var ShopService = function ShopService($http) {
-	  var _this = this;
+	  var service = this;
+	  service.products = [];
+	  service.cart = [];
 	
-	  this.products = [];
-	  this.cart = [];
-	
-	  this.setup = function (products) {
-	    _this.products = products;
+	  service.setup = function (products) {
+	    service.products = products;
 	  };
 	
-	  this.getProducts = function () {
-	    return _this.products;
+	  service.getProducts = function () {
+	    return service.products;
 	  };
 	
-	  this.getProduct = function (productId) {
-	    return _.find(_this.products, function (product) {
+	  service.getProduct = function (productId) {
+	    return _.find(service.products, function (product) {
 	      return product.id == productId;
 	    });
 	  };
 	
-	  this.addToCart = function (productId) {
-	    var product = _this.getProduct(productId);
-	    _this.cart.push(product);
+	  service.addToCart = function (productId) {
+	    var product = service.getProduct(productId);
+	    $http.post("/cart/add-item", product).then(function (response) {
+	      service.cart.push(product);
+	    });
 	  };
 	
-	  this.isInCart = function (id) {
-	    return !!_.find(_this.cart, function (product) {
+	  service.isInCart = function (id) {
+	    return !!_.find(service.cart, function (product) {
 	      return product.id == id;
 	    });
 	  };
 	
-	  this.removeFromCart = function (productId) {
-	    _.remove(_this.cart, function (product) {
-	      return product.id == productId;
+	  service.removeFromCart = function (productId) {
+	    $http['delete']('/cart/remove-item/' + productId).then(function (response) {
+	      _.remove(service.cart, function (product) {
+	        return product.id == productId;
+	      });
 	    });
 	  };
 	
-	  this.getTotal = function () {
-	    return _.sum(_.pluck(_this.cart, 'price'));
+	  service.getTotal = function () {
+	    return _.sum(_.pluck(service.cart, 'price'));
 	  };
 	};
 	

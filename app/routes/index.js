@@ -4,6 +4,6 @@ var path = require('path')
 module.exports = function (app) {
   app.get('/', controllers.shop.products);
   app.get('/cart', controllers.shop.cart);
-  app.post('/cart/add-product', controllers.shop.addToCart);
-  app.delete('/cart/remove-product/:id', controllers.shop.removeFromCart);
+  app.post('/cart/add-item', controllers.shop.addToCart);
+  app.delete('/cart/remove-item/:id', controllers.shop.removeFromCart);
 }
