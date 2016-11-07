@@ -36217,11 +36217,11 @@
 	    templateUrl: './html/products-view.html',
 	    controller: 'ShopCtrl',
 	    controllerAs: 'shopCtrl'
-	  }).state('products.item', {
-	    url: '/:product_id',
+	  }).state('product', {
+	    url: '/products/:product_id',
 	    templateUrl: './html/single-product-view.html',
-	    controller: 'ShopCtrl',
-	    controllerAs: 'shopCtrl'
+	    controller: 'ProductCtrl',
+	    controllerAs: 'productCtrl'
 	  }).state('cart', {
 	    url: '/cart',
 	    templateUrl: './html/cart-view.html',
@@ -36248,7 +36248,7 @@
 	var ShopApp = function ShopApp() {
 	  _classCallCheck(this, ShopApp);
 	
-	  angular.module('shop', ['ui.router', 'ui.bootstrap']).controller('ShopCtrl', _importsEs6.controllers.ShopCtrl).service('ShopService', _importsEs6.services.ShopService).component('shopMenu', _importsEs6.components.ShopMenu).run(function ($templateCache) {
+	  angular.module('shop', ['ui.router', 'ui.bootstrap']).controller('ShopCtrl', _importsEs6.controllers.ShopCtrl).controller('ProductCtrl', _importsEs6.controllers.ProductCtrl).service('ShopService', _importsEs6.services.ShopService).component('shopMenu', _importsEs6.components.ShopMenu).run(function ($templateCache) {
 	    $templateCache.put('./html/products-view.html', __webpack_require__(23));
 	    $templateCache.put('./html/single-product-view.html', __webpack_require__(24));
 	    $templateCache.put('./html/cart-view.html', __webpack_require__(25));
@@ -36282,6 +36282,10 @@
 	
 	var _controllersShopControllerEs62 = _interopRequireDefault(_controllersShopControllerEs6);
 	
+	var _controllersShopProductControllerEs6 = __webpack_require__(29);
+	
+	var _controllersShopProductControllerEs62 = _interopRequireDefault(_controllersShopProductControllerEs6);
+	
 	var _servicesShopServiceEs6 = __webpack_require__(21);
 	
 	var _servicesShopServiceEs62 = _interopRequireDefault(_servicesShopServiceEs6);
@@ -36290,7 +36294,7 @@
 	
 	var _componentsMenuShopMenuComponentEs62 = _interopRequireDefault(_componentsMenuShopMenuComponentEs6);
 	
-	var controllers = { ShopCtrl: _controllersShopControllerEs62['default'] };
+	var controllers = { ShopCtrl: _controllersShopControllerEs62['default'], ProductCtrl: _controllersShopProductControllerEs62['default'] };
 	
 	var components = { ShopMenu: _componentsMenuShopMenuComponentEs62['default'] };
 	
@@ -45287,13 +45291,13 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<shop-menu></shop-menu>\n\n<div class=\"container\">\n  <div id=\"products\" class=\"row list-group\">\n    <div class=\"item col-sm-4 col-md-4\" ng-repeat=\"product in shopCtrl.products\">\n      <div class=\"thumbnail\">\n        <img class=\"group list-group-image\" ng-src=\"{{product.image}}\" alt=\"\" />\n        <div class=\"caption\">\n          <h4 class=\"group inner list-group-item-heading\">{{product.name}}</h4>\n          <p class=\"group inner list-group-item-text\">{{product.description}}</p>\n          <div class=\"row\">\n            <div class=\"col-xs-12 col-md-6\">\n              <p class=\"lead\">${{product.price}}</p>\n            </div>\n            <div class=\"col-xs-12 col-md-6\">\n              <button class=\"btn btn-success\" ng-hide=\"shopCtrl.isInCart(product.id)\" ng-click=\"shopCtrl.addToCart(product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Add to cart\n              </button>\n              <button class=\"btn btn-danger\" ng-show=\"shopCtrl.isInCart(product.id)\" ng-click=\"shopCtrl.removeFromCart(product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Remove from cart\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
+	module.exports = "<shop-menu></shop-menu>\n\n<div class=\"container\">\n  <div id=\"products\" class=\"row list-group\">\n    <div class=\"item col-sm-4 col-md-4\" ng-repeat=\"product in shopCtrl.products\">\n      <div class=\"thumbnail\">\n        <a ui-sref=\"product({ product_id: product.id})\"><img class=\"group list-group-image\" ng-src=\"{{product.image}}\" alt=\"\" /></a>\n        <div class=\"caption\">\n          <h4 class=\"group inner list-group-item-heading\">{{product.name}}</h4>\n          <p class=\"group inner list-group-item-text\">{{product.description}}</p>\n          <div class=\"row\">\n            <div class=\"col-xs-12 col-md-6\">\n              <p class=\"lead\">${{product.price}}</p>\n            </div>\n            <div class=\"col-xs-12 col-md-6\">\n              <button class=\"btn btn-success\" ng-hide=\"shopCtrl.isInCart(product.id)\" ng-click=\"shopCtrl.addToCart(product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Add to cart\n              </button>\n              <button class=\"btn btn-danger\" ng-show=\"shopCtrl.isInCart(product.id)\" ng-click=\"shopCtrl.removeFromCart(product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Remove from cart\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "this is product view";
+	module.exports = "<shop-menu></shop-menu>\n\n<div class=\"container\">\n  <div id=\"products\" class=\"row list-group\">\n    <div class=\"item col-sm-6 col-md-6\">\n      <div class=\"thumbnail\">\n        <div class=\"caption\">\n          <h4 class=\"group inner list-group-item-heading\">{{productCtrl.product.name}}</h4>\n          <p class=\"group inner list-group-item-text\">{{productCtrl.product.description}}</p>\n          <div class=\"row\">\n            <div class=\"col-xs-12 col-md-6\">\n              <p class=\"lead\">${{productCtrl.product.price}}</p>\n            </div>\n            <div class=\"col-xs-12 col-md-6\">\n              <button class=\"btn btn-success\" ng-hide=\"productCtrl.isInCart(productCtrl.product.id)\" ng-click=\"productCtrl.addToCart(productCtrl.product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Add to cart\n              </button>\n              <button class=\"btn btn-danger\" ng-show=\"productCtrl.isInCart(productCtrl.product.id)\" ng-click=\"productCtrl.removeFromCart(productCtrl.product.id)\">\n                <span class=\"glyphicon glyphicon-shopping-cart\"></span>\n                Remove from cart\n              </button>\n            </div>\n          </div>\n        </div>\n        <img class=\"group list-group-image\" ng-src=\"{{productCtrl.product.image}}\" alt=\"\" />\n      </div>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
 /* 25 */
@@ -57680,6 +57684,29 @@
 		return module;
 	}
 
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var ProductCtrl = function ProductCtrl(ShopService, $stateParams) {
+	  _classCallCheck(this, ProductCtrl);
+	
+	  var ctrl = this;
+	  _.extend(ctrl, ShopService);
+	  ctrl.product = ctrl.getProduct($stateParams.product_id);
+	};
+	
+	exports['default'] = ProductCtrl;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

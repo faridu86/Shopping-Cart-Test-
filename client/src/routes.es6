@@ -11,11 +11,11 @@ let config = /*@ngInject*/ ($stateProvider, $sceProvider, $urlRouterProvider) =>
     controller: 'ShopCtrl',
     controllerAs: 'shopCtrl',
   })
-  .state('products.item', {
-    url: '/:product_id',
+  .state('product', {
+    url: '/products/:product_id',
     templateUrl: './html/single-product-view.html',
-    controller: 'ShopCtrl',
-    controllerAs: 'shopCtrl',
+    controller: 'ProductCtrl',
+    controllerAs: 'productCtrl',
   })
   .state('cart', {
     url: '/cart',

@@ -4,7 +4,7 @@
   <div id="products" class="row list-group">
     <div class="item col-sm-4 col-md-4" ng-repeat="product in shopCtrl.products">
       <div class="thumbnail">
-        <img class="group list-group-image" ng-src="{{product.image}}" alt="" />
+        <a ui-sref="product({ product_id: product.id})"><img class="group list-group-image" ng-src="{{product.image}}" alt="" /></a>
         <div class="caption">
           <h4 class="group inner list-group-item-heading">{{product.name}}</h4>
           <p class="group inner list-group-item-text">{{product.description}}</p>

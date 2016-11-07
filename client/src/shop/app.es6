@@ -7,6 +7,7 @@ class ShopApp {
     angular
     .module('shop', ['ui.router', 'ui.bootstrap'])
     .controller('ShopCtrl', controllers.ShopCtrl)
+    .controller('ProductCtrl', controllers.ProductCtrl)
     .service('ShopService', services.ShopService)
     .component('shopMenu', components.ShopMenu)
     .run(($templateCache) => {
