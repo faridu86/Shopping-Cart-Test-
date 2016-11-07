@@ -15,10 +15,10 @@
                     <tr ng-repeat="product in shopCtrl.cart">
                         <td class="col-md-8">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" ng-src="{{product.image}}" style="height: 70px; width: 90px;" /> </a>
+                            <a class="thumbnail pull-left" ui-sref="product({product_id: product.id})"> <img class="media-object" ng-src="{{product.image}}" style="height: 70px; width: 90px;" /> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#">{{product.name}}</a></h4>
-                                <h5 class="media-heading"> by <a href="#">{{product.description}}</a></h5>
+                                <h4 class="media-heading"><a ui-sref="product({product_id: product.id})">{{product.name}}</a></h4>
+                                <h5 class="media-heading"> by <a ui-sref="product({product_id: product.id})">{{product.description}}</a></h5>
                             </div>
                         </div></td>
                         <td class="col-md-2 text-center"><strong>${{product.price}}</strong></td>
