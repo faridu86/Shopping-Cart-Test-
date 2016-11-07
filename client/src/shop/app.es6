@@ -2,16 +2,20 @@
 
 import { controllers, components, services, filters } from './imports.es6';
 
-class FamilyApp {
+class ShopApp {
   constructor() {
     angular
     .module('shop', ['ui.router', 'ui.bootstrap'])
     .controller('ShopCtrl', controllers.ShopCtrl)
     .service('ShopService', services.ShopService)
+    .component('shopMenu', components.ShopMenu)
     .run(($templateCache) => {
-      $templateCache.put('./html/main-view.html', require('./html/main-view.html'));
+      $templateCache.put('./html/products-view.html', require('./html/products-view.html'));
+      $templateCache.put('./html/single-product-view.html', require('./html/single-product-view.html'));
+      $templateCache.put('./html/cart-view.html', require('./html/cart-view.html'));
+      $templateCache.put('./components/menu/shop.menu.html', require('./components/menu/shop.menu.html'));
     });
   }
 }
 
-new FamilyApp
+new ShopApp

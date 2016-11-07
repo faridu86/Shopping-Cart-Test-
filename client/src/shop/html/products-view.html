@@ -1,0 +1,30 @@
+<shop-menu></shop-menu>
+
+<div class="container">
+  <div id="products" class="row list-group">
+    <div class="item col-sm-4 col-md-4" ng-repeat="product in shopCtrl.products">
+      <div class="thumbnail">
+        <img class="group list-group-image" ng-src="{{product.image}}" alt="" />
+        <div class="caption">
+          <h4 class="group inner list-group-item-heading">{{product.name}}</h4>
+          <p class="group inner list-group-item-text">{{product.description}}</p>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <p class="lead">${{product.price}}</p>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <button class="btn btn-success" ng-hide="shopCtrl.isInCart(product.id)" ng-click="shopCtrl.addToCart(product.id)">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                Add to cart
+              </button>
+              <button class="btn btn-danger" ng-show="shopCtrl.isInCart(product.id)" ng-click="shopCtrl.removeFromCart(product.id)">
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+                Remove from cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

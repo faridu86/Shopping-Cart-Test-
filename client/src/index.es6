@@ -2,12 +2,14 @@
 
 import 'angular';
 import 'angular-ui-router';
-import RoutesConfig from "./routes.es6";
 
-console.log('hellp')
+import _ from 'lodash';
+
+import RoutesConfig from './routes.es6';
+import ShoppingCart from './shop/app.es6';
+
 class dc {
   constructor() {
-    console.log( 'charta bacho');
     angular
     .module('dc', ['shop'])
     .config(RoutesConfig);

@@ -2,7 +2,9 @@
 
 class ShopCtrl {
   constructor (ShopService) {
-    console.log('hellow worldy')
+    ShopService.setup( window.params.products);
+    let ctrl = this;
+    _.extend( ctrl, ShopService)
   }
 }
 
